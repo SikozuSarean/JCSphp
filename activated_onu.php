@@ -3,6 +3,7 @@
 <title>All activated ONUs</title>
 
 <style>
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -16,9 +17,35 @@ th, td {
 </style>
     </head>
 <body>
+    <h1>test</h1>
 <?php
 
-require_once "functions.git";
+ini_set('display_errors', 1);
+ini_set('display_startup_errrors', 1);
+error_reporting(E_ALL);
+
+function elapsed_time($time_start) {
+    $time_end = microtime(true);
+    return $time_end - $time_start;
+}
+
+function read_snmp_values($ip, $community, array $oids) {
+    $output = [];
+
+    $session = new SNMP(SNMP::VERSION_2C, $ip, $community);
+    $session->quick_print = TRUE;
+    $session->valueretrieval = SNMP_VALUE_PLAIN;
+    foreach ($oids as $key => $value) {
+        $output["$key"] = $session->get($value, TRUE);
+    }
+    $session->close();
+    return $output;
+}
+
+function calculate_onu_id($gcob, $pon, $position) {
+    return $gcob * pow(2, 25) + $pon * pow(2, 19) + $position * pow(2, 8);
+}
+
 $time_start = microtime(true);
 
 $timeout = 5000000;
@@ -53,7 +80,7 @@ $olts  = array(
                "FH12" => "192.168.100.112",
                "FH13" => "192.168.100.113",
              );
-//$olts = array("FH9" => "192.168.100.109");
+$olts = array("FH9" => "192.168.100.109");
 ?>
 <table style="border: 1;">
     <tr>
