@@ -16,37 +16,44 @@ $test_var = "<tr>
 <td>5055</td>
 <td>48.92&deg;C</td>
 </tr>";
-echo $test_var;
+//echo $test_var;
 
-$elements_pattern = "/(?<=>).*(?=<)/";
+$elements_pattern = "/(?<=>).*(?=<)/"; //regex pattern for isolating the elements within the line 
 
-preg_match_all($elements_pattern,$test_var,$matches,PREG_PATTERN_ORDER);
-//$Id = $matches[0][0];
-//echo $Id;
-$OLT = $matches[0][1];
-echo $OLT;
-//$Index = $matches[0][2];
-//echo $Index;
-$GCOB = $matches[0][3];
-echo $GCOB;
-$PON = $matches[0][4];
-echo $PON;
-$Position = $matches[0][5];
-echo $Position;
-$Status = $matches[0][6];
-echo $Status;
-$MAC_ONU = $matches[0][7];
-echo $MAC_ONU;
-$Transmit = $matches[0][8];
-echo $Transmit;
-$Receive = $matches[0][9];
-echo $Receive;
-$Down_speed = $matches[0][10];
-echo $Down_speed;
-$Up_speed = $matches[0][11];
-echo $Up_speed;
-$Distance = $matches[0][12];
-echo $Distance;
-$Temperature = $matches[0][13];
-echo $Temperature;
+preg_match_all($elements_pattern,$test_var,$line_matches,PREG_PATTERN_ORDER);
+//$Id = $line_matches[0][0];
+////echo $Id;
+$OLT = $line_matches[0][1];
+//echo $OLT;
+//$Index = $line_matches[0][2];
+////echo $Index;
+$GCOB = $line_matches[0][3];
+//echo $GCOB;
+$PON = $line_matches[0][4];
+//echo $PON;
+$Position = $line_matches[0][5];
+//echo $Position;
+$Status = $line_matches[0][6];
+//echo $Status;
+$MAC_ONU = $line_matches[0][7];
+//echo $MAC_ONU;
+$Transmit = $line_matches[0][8];
+//echo $Transmit;
+$Receive = $line_matches[0][9];
+//echo $Receive;
+$Down_speed = $line_matches[0][10];
+//echo $Down_speed;
+$Up_speed = $line_matches[0][11];
+//echo $Up_speed;
+$Distance = $line_matches[0][12];
+//echo $Distance;
+$Temperature = $line_matches[0][13];
+//echo $Temperature;
+
+$delimiter = "_"; //delimiter used for join
+$line_sequences_array = array($OLT,$GCOB,$PON,$Position,$Status,
+$MAC_ONU,$Transmit,$Receive,$Down_speed,
+$Up_speed,$Distance,$Temperature ); //array of my elements
+
+echo implode($delimiter,$line_sequences_array);
 ?>
