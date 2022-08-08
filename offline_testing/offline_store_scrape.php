@@ -9,6 +9,6 @@ $myfile_location = "all_activated_onus_for_test.txt";
 $myfile = fopen($myfile_location,"r")or die("Unable to open the document");
 $myfile_open = fread($myfile,filesize($myfile_location));
 
-scrape_function($myfile_open);
+store_scrape($myfile_open);
 
 ?>

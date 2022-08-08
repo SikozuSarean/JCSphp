@@ -20,13 +20,13 @@ $ch = curl_init();
 //another request preserving the session
 
 curl_setopt($ch, CURLOPT_URL, $url);
-//curl_setopt($ch, CURLOPT_POST, false);
-//curl_setopt($ch, CURLOPT_POSTFIELDS, "");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); //adjusted to only read and not to return
+curl_setopt($ch, CURLOPT_POST, false);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "");
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); //adjusted to only read and not to return
 $answer = curl_exec($ch);
-//if (curl_error($ch)) {
-  //  echo curl_error($ch);
-//}
+if (curl_error($ch)) {
+    echo curl_error($ch);
+}
 curl_close ($ch);
 
 ?>
