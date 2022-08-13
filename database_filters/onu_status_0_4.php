@@ -11,13 +11,23 @@
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h2>COUNTING STUFF</h2>
+<h2>Full report ONU status 0 and 4</h2>
 <table class='table table-bordered'>
 <tr>
-<th>DATE TIME STAMP</th>
-<th>COUNT DISTINCT ONU IN EACH DATE TIME STAMP</th>
-<th>COUNT EACH DATE TIME STAMP</th>
-<th>NUMBER OF DUPLICATES IN EACH REPORT</th>
+<th>Crt</th>
+<th>OLT</th>
+<th>GCOB</th>
+<th>PON</th>
+<th>Position</th>
+<th>Status</th>
+<th>MAC_ONU</th>
+<th>Transmit</th>
+<th>Receive</th>
+<th>Down_speed</th>
+<th>Up_Speed</th>
+<th>Distance</th>
+<th>Temperature</th>
+<th>Time_stamp</th>
 </tr>
 
 <html>
@@ -25,13 +35,18 @@
 
  <?php
 include "../secu_data.php";
-
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-foreach($mysqli->query('SELECT * 
+$row = $_GET['Time_stamp'];
+//echo $row;
+
+
+foreach($mysqli->query("SELECT * 
 FROM attenuation_report 
-WHERE "FH:TT:10:79:fe:e8" IN (MAC_ONU) AND "2022-08-08 16:22:00" IN (Time_stamp)
- ;') as $row) 
+WHERE Time_stamp = '$row'
+AND Status in (0,4)
+ORDER BY Status ASC
+;") as $row) 
     {
     echo "<tr>";
     echo "<td>" . $row[0] . "</td>";
@@ -48,11 +63,9 @@ WHERE "FH:TT:10:79:fe:e8" IN (MAC_ONU) AND "2022-08-08 16:22:00" IN (Time_stamp)
     echo "<td>" . $row[11] . "</td>";
     echo "<td>" . $row[12] . "</td>";
     echo "<td>" . $row[13] . "</td>";
-
     echo "</tr>";
 }
-//SELECT MAC_ONU, COUNT(MAC_ONU) AS cnt FROM attenuation_report GROUP BY `MAC_ONU` HAVING cnt > 1 ORDER BY cnt DESC;
-//SELECT MAC_ONU, COUNT( MAC_ONU ) total_duplicates FROM attenuation_report GROUP BY MAC_ONU HAVING total_duplicates > 1;
+
 ?>
 </tbody></table>
 </div>

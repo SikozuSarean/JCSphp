@@ -14,10 +14,20 @@
 <h2>COUNTING STUFF</h2>
 <table class='table table-bordered'>
 <tr>
-<th>DATE TIME STAMP</th>
-<th>COUNT DISTINCT ONU IN EACH DATE TIME STAMP</th>
-<th>COUNT EACH DATE TIME STAMP</th>
-<th>NUMBER OF DUPLICATES IN EACH REPORT</th>
+<th>Crt</th>
+<th>OLT</th>
+<th>GCOB</th>
+<th>PON</th>
+<th>Position</th>
+<th>Status</th>
+<th>MAC_ONU</th>
+<th>Transmit</th>
+<th>Receive</th>
+<th>Down_speed</th>
+<th>Up_Speed</th>
+<th>Distance</th>
+<th>Temperature</th>
+<th>Time_stamp</th>
 </tr>
 
 <html>
@@ -29,8 +39,8 @@ include "../secu_data.php";
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
 foreach($mysqli->query('SELECT * 
-FROM attenuation_report 
-WHERE "FH:TT:10:79:fe:e8" IN (MAC_ONU) AND "2022-08-08 16:22:00" IN (Time_stamp)
+ FROM attenuation_report 
+WHERE MAC_ONU like "FH:TT:10:79:fe:e8"
  ;') as $row) 
     {
     echo "<tr>";
