@@ -27,14 +27,17 @@
 
  <?php
 include "../secu_data.php";
+$counter = 0;
 
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
+
 foreach($mysqli->query('SELECT Time_stamp,
     COUNT(DISTINCT(MAC_ONU)),
     COUNT(Time_stamp) 
     FROM attenuation_report 
     GROUP BY Time_stamp
     ORDER BY Time_stamp DESC') as $row) { //sort by date time stamp descendent
+    $counter++;
     echo "<tr>";
     $time_date_stamp = $row['Time_stamp'];
     echo "<td> 
@@ -60,6 +63,7 @@ foreach($mysqli->query('SELECT Time_stamp,
     </td>";
     echo "</tr>";
 }
+echo "$counter Individual reports in total in the data base table";
 
 ?>
 </tbody></table>
