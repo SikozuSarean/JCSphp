@@ -1,8 +1,10 @@
 Visual Studio
 
 ctrl k c - comment out
+ctrl + / html
 
 Mysql commands
+use JCS;
 
 Description	Command
 To login (from unix shell) use -h only if needed.	[mysql dir]/bin/mysql -h hostname -u root -p

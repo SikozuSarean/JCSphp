@@ -78,8 +78,8 @@ function store_scrape($scrape_target){
     //echo 'Connected successfully to mySQL. <BR>'; 
 
     $mysqli->select_db($db_name_toni);
-    Echo ("Selected the $db_name_toni database ");
-    echo 'Connected successfully to mySQL. <BR>'; 
+    //echo ("Selected the $db_name_toni database ");
+    //echo 'Connected successfully to mySQL. <BR>'; 
     if (!$mysqli) { 
         die('Could not connect'); 
     } 
@@ -141,7 +141,7 @@ function store_scrape($scrape_target){
         $qq = array($OLT, $GCOB, $PON, $Position, $Status, $MAC_ONU, $Transmit, $Receive, $Down_speed, $Up_Speed, $Distance, $Temperature, $Time_stamp);
 
         if ($result = $mysqli->query($query)) {
-            echo "<p>You have successfully entered $qq[5] and all the asociated data into the database.</P>";
+            // echo "<p>You have successfully entered $qq[5] and all the asociated data into the database.</P>";
         }
         else
         {
@@ -150,6 +150,8 @@ function store_scrape($scrape_target){
 
     }
 $mysqli->close();
-
+echo "The attenuation report marked with $Time_stamp have been successfully runned and stored into the database. <br>
+To vew $Time_stamp and all the other reports, please click on the fallowing link: <br>
+<h1><a href='database_filters/show_database_by_date_script_view.php'>show_database_by_date_script </a></h1>";
 }
 ?>

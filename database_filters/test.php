@@ -11,13 +11,18 @@
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h2>COUNTING STUFF</h2>
+<h2>Show All Database Table Grouped by Date Time Stamp</h2>
 <table class='table table-bordered'>
 <tr>
 <th>DATE TIME STAMP</th>
-<th>COUNT DISTINCT ONU IN EACH DATE TIME STAMP</th>
-<th>COUNT EACH DATE TIME STAMP</th>
-<th>NUMBER OF DUPLICATES IN EACH REPORT</th>
+<th>COUNT status 0 and 4</th>
+<th>COUNT Recieve < -27.00</th>
+<th>COUNT Duplicates</th>
+<th>COUNT distinct MAC_ONU</th>
+<th>COUNT distinct Time_stamp</th>
+
+
+
 </tr>
 
 <html>
@@ -25,20 +30,58 @@
 
  <?php
 include "../secu_data.php";
+$counter = 0;
 
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-foreach($mysqli->query('SELECT * 
-FROM attenuation_report 
-WHERE "FH:TT:10:79:fe:e8" IN (MAC_ONU) AND "2022-08-08 16:22:00" IN (Time_stamp)
- ;') as $row) 
-    {
+foreach($mysqli->query('WITH CTE_all as
+(SELECT *
+FROM attenuation_report
+)
+SELECT ar.Time_stamp,
+COUNT(zero_status.Status) AS zero_status,
+COUNT(four_status.Status) AS four_status,
+COUNT(smallest_power.Receive) AS smallest_power,
+COUNT(ar.MAC_ONU)- COUNT(DISTINCT ar.MAC_ONU) AS count_duplicates,
+COUNT(DISTINCT(ar.MAC_ONU)) AS count_distinct_mac_onu,
+COUNT(ar.Time_stamp) AS count_time_stamp 
+FROM CTE_all ar 
+LEFT JOIN (
+  SELECT ar2.Crt, ar2.Time_stamp, Status
+  FROM CTE_all ar2 
+  WHERE ar2.Status = 0
+) zero_status ON zero_status.Crt = ar.Crt
+LEFT JOIN (
+  SELECT ar3.Crt, ar3.Time_stamp, ar3.Status
+  FROM CTE_all ar3 
+  WHERE ar3.Status = 4
+) four_status ON four_status.Crt = ar.Crt
+LEFT JOIN (
+  SELECT ar4.Crt, ar4.Time_stamp, ar4.Receive
+  FROM CTE_all ar4 
+  WHERE ar4.Receive < -27.00
+) smallest_power ON smallest_power.Crt = ar.Crt
+GROUP BY ar.Time_stamp
+ORDER BY ar.Time_stamp DESC') as $row) { //sort by date time stamp descendent
+    $counter++;
     echo "<tr>";
-    echo "<td>" . $row[0] . "</td>";
-    echo "<td>" . $row[1] . "</td>";
-    echo "<td>" . $row[2] . "</td>";
-    echo "<td>" . $row[3] . "</td>";
-    echo "<td>" . $row[4] . "</td>";
+    $time_date_stamp = $row['Time_stamp'];
+    echo "<td> 
+    <a href = 'show_full_date_time_report.php?Time_stamp=".$row['Time_stamp']."'>$time_date_stamp </a>
+    </td>";
+    $status_0 = $row[1];
+    $status_4 = $row[2];
+    echo "<td> 
+    <a href = 'onu_status_0_4.php?Time_stamp=".$row['Time_stamp']."'>$status_0 $status_4</a>
+    </td>";
+    $Recieve_low = $row[3];
+    echo "<td> 
+    <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'>$Recieve_low</a>
+    </td>";
+    $Duplicates = $row[4];
+    echo "<td> 
+    <a href = 'DUPLICATE_ONU.php?Time_stamp=".$row['Time_stamp']."'>$Duplicates</a>
+    </td>";
     echo "<td>" . $row[5] . "</td>";
     echo "<td>" . $row[6] . "</td>";
     echo "<td>" . $row[7] . "</td>";
@@ -48,11 +91,10 @@ WHERE "FH:TT:10:79:fe:e8" IN (MAC_ONU) AND "2022-08-08 16:22:00" IN (Time_stamp)
     echo "<td>" . $row[11] . "</td>";
     echo "<td>" . $row[12] . "</td>";
     echo "<td>" . $row[13] . "</td>";
-
     echo "</tr>";
 }
-//SELECT MAC_ONU, COUNT(MAC_ONU) AS cnt FROM attenuation_report GROUP BY `MAC_ONU` HAVING cnt > 1 ORDER BY cnt DESC;
-//SELECT MAC_ONU, COUNT( MAC_ONU ) total_duplicates FROM attenuation_report GROUP BY MAC_ONU HAVING total_duplicates > 1;
+echo "$counter Individual reports in total in the data base table";
+
 ?>
 </tbody></table>
 </div>

@@ -20,6 +20,7 @@
 <th>NUMBER OF DUPLICATES IN EACH REPORT</th>
 <th>Full report with onu status 0 and 4</th>
 <th>Full report with onu with bad power</th>
+<th>Delete report(working but out of reach for now)</th>
 </tr>
 
 <html>
@@ -49,18 +50,24 @@ foreach($mysqli->query('SELECT Time_stamp,
     $duplicates = number_format($row[2]-$row[1],0,"","");
     if ($duplicates > 0) {
         echo "<td>
-        <a href = 'detailed_duplicates.php?Time_stamp=".$row['Time_stamp']."'>Detailed $duplicates duplicates report </a>
+        <a href = 'detailed_duplicates.php?Time_stamp=".$row['Time_stamp']."'>Detailed $duplicates duplicates report (not working properly)</a>
         </td>";
     }  
         else {
             echo "<td>" . "" . "</td>";
         }
     echo "<td> 
-    <a href = 'onu_status_0_4.php?Time_stamp=".$row['Time_stamp']."'> Show full report status 0 and 4</a>
+    <a href = 'onu_status_0_4.php?Time_stamp=".$row['Time_stamp']."'> Show full report ONU status 0 and 4</a>
     </td>";
     echo "<td> 
-    <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'> Show full report power < 27.00 </a>
+    <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'> Show full report ONU power < -27.00 </a>
     </td>";
+    // echo "<td> 
+    // <a onClick=\"javascript: return confirm('Are you sure you want to delete ALL TABLE ENTRY for $row[0]?');\" 
+    // href = 'delete_all_table_entry.php?Time_stamp=".$row['Time_stamp']."'
+    // style='color: red;'' > Delete all entry for $row[0] </a>
+    // </td>";
+
     echo "</tr>";
 }
 echo "$counter Individual reports in total in the data base table";
