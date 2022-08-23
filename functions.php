@@ -150,8 +150,9 @@ function store_scrape($scrape_target){
 
     }
 $mysqli->close();
-echo "The attenuation report marked with $Time_stamp have been successfully runned and stored into the database. <br>
-To vew $Time_stamp and all the other reports, please click on the fallowing link: <br>
+echo "
+The attenuation report marked with $Time_stamp was successfully run and stored in the database. 
+To view $Time_stamp and all the other reports, please click on the following link: <br>
 <h1><a href='database_filters/show_database_by_date_script_view.php'>show_database_by_date_script </a></h1>";
 }
 ?>

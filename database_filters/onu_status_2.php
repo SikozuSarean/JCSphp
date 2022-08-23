@@ -11,7 +11,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h2>Full report</h2>
+<h2>Full report ONU status 2</h2>
 <table class='table table-bordered'>
 <tr>
 <th>Crt</th>
@@ -37,15 +37,19 @@
 include "../secu_data.php";
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-$row = $_GET['Time_stamp'];
+$row1 = $_GET['Time_stamp'];
 //echo $row;
+$counter = 0;
 
 
 foreach($mysqli->query("SELECT * 
 FROM attenuation_report 
-WHERE Time_stamp = '$row'
+WHERE Time_stamp = '$row1'
+AND Status in (2)
+ORDER BY Status ASC
 ;") as $row) 
     {
+    $counter++;
     echo "<tr>";
     echo "<td>" . $row[0] . "</td>";
     echo "<td>" . $row[1] . "</td>";
@@ -63,6 +67,7 @@ WHERE Time_stamp = '$row'
     echo "<td>" . $row[13] . "</td>";
     echo "</tr>";
 }
+echo "$counter ONU with status 2 in total in the $row1 report";
 
 ?>
 </tbody></table>

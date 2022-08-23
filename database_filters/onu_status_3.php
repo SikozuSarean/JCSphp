@@ -11,7 +11,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h2>COUNTING STUFF</h2>
+<h2>Full report ONU status 3</h2>
 <table class='table table-bordered'>
 <tr>
 <th>Crt</th>
@@ -35,14 +35,21 @@
 
  <?php
 include "../secu_data.php";
-
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-foreach($mysqli->query('SELECT * 
- FROM attenuation_report 
-WHERE MAC_ONU like "FH:TT:10:79:fe:e8"
- ;') as $row) 
+$row1 = $_GET['Time_stamp'];
+//echo $row;
+$counter = 0;
+
+
+foreach($mysqli->query("SELECT * 
+FROM attenuation_report 
+WHERE Time_stamp = '$row1'
+AND Status in (3)
+ORDER BY Status ASC
+;") as $row) 
     {
+    $counter++;
     echo "<tr>";
     echo "<td>" . $row[0] . "</td>";
     echo "<td>" . $row[1] . "</td>";
@@ -58,11 +65,10 @@ WHERE MAC_ONU like "FH:TT:10:79:fe:e8"
     echo "<td>" . $row[11] . "</td>";
     echo "<td>" . $row[12] . "</td>";
     echo "<td>" . $row[13] . "</td>";
-
     echo "</tr>";
 }
-//SELECT MAC_ONU, COUNT(MAC_ONU) AS cnt FROM attenuation_report GROUP BY `MAC_ONU` HAVING cnt > 1 ORDER BY cnt DESC;
-//SELECT MAC_ONU, COUNT( MAC_ONU ) total_duplicates FROM attenuation_report GROUP BY MAC_ONU HAVING total_duplicates > 1;
+echo "$counter ONU with status 3 in total in the $row1 report";
+
 ?>
 </tbody></table>
 </div>

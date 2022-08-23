@@ -14,19 +14,16 @@
 <h2>COUNTING STUFF</h2>
 <table class='table table-bordered'>
 <tr>
-<th>Crt</th>
-<th>OLT</th>
-<th>GCOB</th>
-<th>PON</th>
-<th>Position</th>
+<!-- <th>Crt</th> -->
+<th>ACL</th>
 <th>Status</th>
 <th>MAC_ONU</th>
-<th>Transmit</th>
+<!-- <th>Transmit</th> -->
 <th>Receive</th>
-<th>Down_speed</th>
+<!-- <th>Down_speed</th>
 <th>Up_Speed</th>
 <th>Distance</th>
-<th>Temperature</th>
+<th>Temperature</th> -->
 <th>Time_stamp</th>
 </tr>
 
@@ -35,39 +32,35 @@
 
  <?php
 include "../secu_data.php";
-$mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
-$row = $_GET['Time_stamp'];
-echo $row;
 
-foreach($mysqli->query("SELECT *
-FROM attenuation_report
-WHERE Time_stamp = '$row'
-AND COUNT(MAC_ONU) > 1
-;") as $row) 
+$mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
+
+foreach($mysqli->query('SELECT * 
+ FROM attenuation_report 
+WHERE MAC_ONU like "FH:TT:10:79:fe:e8"
+ORDER BY Time_stamp ASC 
+ ;') as $row) 
     {
     echo "<tr>";
-    echo "<td>" . $row[0] . "</td>";
-    echo "<td>" . $row[1] . "</td>";
-    echo "<td>" . $row[2] . "</td>";
-    echo "<td>" . $row[3] . "</td>";
-    echo "<td>" . $row[4] . "</td>";
+    //echo "<td>" . $row[0] . "</td>";
+    echo "<td>" . $row[1] . "-" . $row[2] . "-" . $row[3] . "-" . $row[4] . "</td>";
     echo "<td>" . $row[5] . "</td>";
     echo "<td>" . $row[6] . "</td>";
-    echo "<td>" . $row[7] . "</td>";
+    //echo "<td>" . $row[7] . "</td>";
     echo "<td>" . $row[8] . "</td>";
-    echo "<td>" . $row[9] . "</td>";
-    echo "<td>" . $row[10] . "</td>";
-    echo "<td>" . $row[11] . "</td>";
-    echo "<td>" . $row[12] . "</td>";
+    //echo "<td>" . $row[9] . "</td>";
+    //echo "<td>" . $row[10] . "</td>";
+    //echo "<td>" . $row[11] . "</td>";
+    //echo "<td>" . $row[12] . "</td>";
     echo "<td>" . $row[13] . "</td>";
+
     echo "</tr>";
 }
-
+//SELECT MAC_ONU, COUNT(MAC_ONU) AS cnt FROM attenuation_report GROUP BY `MAC_ONU` HAVING cnt > 1 ORDER BY cnt DESC;
+//SELECT MAC_ONU, COUNT( MAC_ONU ) total_duplicates FROM attenuation_report GROUP BY MAC_ONU HAVING total_duplicates > 1;
 ?>
 </tbody></table>
 </div>
 </div>
 </div>
 </body>
-</html>
-
