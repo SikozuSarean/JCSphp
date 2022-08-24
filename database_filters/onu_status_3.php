@@ -1,38 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>example-count-with-distinct- php mysql examples | w3resource</title>
-<meta name="description" content="example-count-with-distinct- php mysql examples | w3resource">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-<div class="row">
-<div class="col-md-12">
+<?php
+include "../header.php";
+?>
 <h2>Full report ONU status 3</h2>
-<table class='table table-bordered'>
-<tr>
-<th>Crt</th>
-<th>OLT</th>
-<th>GCOB</th>
-<th>PON</th>
-<th>Position</th>
-<th>Status</th>
-<th>MAC_ONU</th>
-<th>Transmit</th>
-<th>Receive</th>
-<th>Down_speed</th>
-<th>Up_Speed</th>
-<th>Distance</th>
-<th>Temperature</th>
-<th>Time_stamp</th>
-</tr>
-
-<html>
-<body>
-
+<table class='blueTable'>
+    <thead>
+        <tr>
+            <th>Crt</th>
+            <th>OLT</th>
+            <th>GCOB</th>
+            <th>PON</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>MAC_ONU</th>
+            <th>Transmit</th>
+            <th>Receive</th>
+            <th>Down_speed</th>
+            <th>Up_Speed</th>
+            <th>Distance</th>
+            <th>Temperature</th>
+            <th>Time_stamp</th>
+        </tr>
+    </thead>
+    <tbody>
  <?php
 include "../secu_data.php";
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
@@ -67,12 +56,6 @@ ORDER BY Status ASC
     echo "<td>" . $row[13] . "</td>";
     echo "</tr>";
 }
-echo "$counter ONU with status 3 in total in the $row1 report";
-
+echo "<tr>$counter ONU with status 3 in total in the $row1 report</tr>";
+include "../footer.php";
 ?>
-</tbody></table>
-</div>
-</div>
-</div>
-</body>
-</html>

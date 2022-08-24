@@ -4,34 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Antonio JCS</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="../styles.css">
 
 <a class="button" href="../scrape_and_store.php" target="_blank">Generate a new report</a>
 
 </head>
 <body>
-<div class="container">
-<div class="row">
-<div class="col-md-12">
+<?php
+include "onu_search_view.php";
+?>
 <h2>Show All Database Table Grouped by Date Time Stamp</h2>
-<table class='table table-bordered'>
-<tr>
-<th>DATE TIME STAMP</th>
-<th>ONU status 0 and 4</th>
-<th>ONU Recieve < -27.00</th>
-<th>ONU Duplicates</th>
-<th>COUNT distinct MAC_ONU</th>
-<th>COUNT distinct Time_stamp</th>
-<th>ONU status 2</th>
-<th>ONU status 3</th>
-<th>ONU status abnormal</th>
 
-
-
-</tr>
-
-<html>
-<body>
+<table class="blueTable">
+  <thead>
+    <tr>
+      <th colspan="1">DATE TIME</th>
+      <th colspan="4">Status</th>
+      <th colspan="1">Receive</th>
+      <th colspan="3">MAC_ONU</th>
+      <th colspan="1">Time_stamp</th>
+    </tr>
+    <tr>
+      <th>STAMP</th>
+      <th>0 and 4</th>
+      <th>2</th>
+      <th>3</th>
+      <th>abnormal</th>
+      <th>< -27.00</th>
+      <th>Duplicates</th>
+      <th>Abnormal</th>
+      <th>Distinct</th>
+      <th>Distinct</th>
+    </tr>
+  </thead>
+<tbody>
 
  <?php
 include "../secu_data.php";
@@ -90,23 +96,13 @@ ORDER BY ar.Time_stamp DESC') as $row) { //sort by date time stamp descendent
     echo "<tr>";
     $time_date_stamp = $row['Time_stamp'];
     echo "<td> 
-    <a href = 'onu_status_1.php?Time_stamp=".$row['Time_stamp']."'>$time_date_stamp </a>
+    <a href = 'onu_status_all.php?Time_stamp=".$row['Time_stamp']."'>$time_date_stamp </a>
     </td>";
     $status_0 = $row[1];
     $status_4 = $row[2];
     echo "<td> 
     <a href = 'onu_status_0_4.php?Time_stamp=".$row['Time_stamp']."'>$status_0 $status_4</a>
     </td>";
-    $Recieve_low = $row[3];
-    echo "<td> 
-    <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'>$Recieve_low</a>
-    </td>";
-    $Duplicates = $row[4];
-    echo "<td> 
-    <a href = 'DUPLICATE_ONU.php?Time_stamp=".$row['Time_stamp']."'>$Duplicates</a>
-    </td>";
-    echo "<td>" . $row[5] . "</td>";
-    echo "<td>" . $row[6] . "</td>";
     $status_2 = $row[7];
     echo "<td> 
     <a href = 'onu_status_2.php?Time_stamp=".$row['Time_stamp']."'>$status_2</a>
@@ -119,6 +115,20 @@ ORDER BY ar.Time_stamp DESC') as $row) { //sort by date time stamp descendent
     echo "<td> 
     <a href = 'onu_status_abnormal.php?Time_stamp=".$row['Time_stamp']."'>$status_abnormal</a>
     </td>";
+    $Recieve_low = $row[3];
+    echo "<td> 
+    <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'>$Recieve_low</a>
+    </td>";
+    $Duplicates = $row[4];
+    echo "<td> 
+    <a href = 'onu_duplicate.php?Time_stamp=".$row['Time_stamp']."'>$Duplicates</a>
+    </td>";
+    $AbnormalMAC_ONU = $qq;
+    echo "<td> 
+    <a href = 'qq.php?Time_stamp=".$row['qq']."'>$AbnormalMAC_ONU</a>
+    </td>";
+    echo "<td>" . $row[5] . "</td>";
+    echo "<td>" . $row[6] . "</td>";
     echo "<td>" . $row[10] . "</td>";
     echo "<td>" . $row[11] . "</td>";
     echo "<td>" . $row[12] . "</td>";
@@ -127,10 +137,5 @@ ORDER BY ar.Time_stamp DESC') as $row) { //sort by date time stamp descendent
 }
 echo "$counter Individual reports in total in the data base table";
 
+include "../footer.php";
 ?>
-</tbody></table>
-</div>
-</div>
-</div>
-</body>
-</html>

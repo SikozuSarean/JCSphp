@@ -1,38 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>example-count-with-distinct- php mysql examples | w3resource</title>
-<meta name="description" content="example-count-with-distinct- php mysql examples | w3resource">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-<div class="row">
-<div class="col-md-12">
-<h2>COUNTING STUFF</h2>
-<table class='table table-bordered'>
-<tr>
-<th>Crt</th>
-<th>OLT</th>
-<th>GCOB</th>
-<th>PON</th>
-<th>Position</th>
-<th>Status</th>
-<th>MAC_ONU</th>
-<th>Transmit</th>
-<th>Receive</th>
-<th>Down_speed</th>
-<th>Up_Speed</th>
-<th>Distance</th>
-<th>Temperature</th>
-<th>Time_stamp</th>
-</tr>
-
-<html>
-<body>
-
+<?php
+include "../header.php";
+?>
+<h2>Duplicates</h2>
+<table class='blueTable'>
+    <thead>
+        <tr>
+            <th>Crt</th>
+            <th>OLT</th>
+            <th>GCOB</th>
+            <th>PON</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>MAC_ONU</th>
+            <th>Transmit</th>
+            <th>Receive</th>
+            <th>Down_speed</th>
+            <th>Up_Speed</th>
+            <th>Distance</th>
+            <th>Temperature</th>
+            <th>Time_stamp</th>
+        </tr>
+    </thead>
+    <tbody>
  <?php
 include "../secu_data.php";
 
@@ -75,15 +64,7 @@ ORDER BY ar1.MAC_ONU;") as $row)
     echo "<td>" . $row[13] . "</td>";
     echo "</tr>";
 }
-echo "$counter Duplicate onu rows found in $row1 report";
-
-//SELECT MAC_ONU, COUNT(MAC_ONU) AS cnt FROM attenuation_report GROUP BY `MAC_ONU` HAVING cnt > 1 ORDER BY cnt DESC;
-//SELECT MAC_ONU, COUNT( MAC_ONU ) total_duplicates FROM attenuation_report GROUP BY MAC_ONU HAVING total_duplicates > 1;
+echo "<tr>$counter Duplicate onu rows found in $row1 report</tr>";
+include "../footer.php";
 ?>
-</tbody></table>
-</div>
-</div>
-</div>
-</body>
-</html>
 

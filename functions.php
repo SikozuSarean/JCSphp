@@ -153,6 +153,6 @@ $mysqli->close();
 echo "
 The attenuation report marked with $Time_stamp was successfully run and stored in the database. 
 To view $Time_stamp and all the other reports, please click on the following link: <br>
-<h1><a href='database_filters/show_database_by_date_script_view.php'>show_database_by_date_script </a></h1>";
+<h1><a href='database_filters/MAIN_filter.php'>Back to the main page, click me! </a></h1>";
 }
 ?>

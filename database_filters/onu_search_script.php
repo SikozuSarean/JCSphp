@@ -1,7 +1,7 @@
 <?php
 include "../header.php";
 ?>
-<h2>Full report ONU status 2</h2>
+<h2>Full report for one onu</h2>
 <table class='blueTable'>
     <thead>
         <tr>
@@ -23,19 +23,19 @@ include "../header.php";
     </thead>
     <tbody>
  <?php
+include "onu_search_view.php";
 include "../secu_data.php";
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-$row1 = $_GET['Time_stamp'];
+$row1 = $_REQUEST['MAC_ONU'];
 //echo $row;
 $counter = 0;
 
 
 foreach($mysqli->query("SELECT * 
 FROM attenuation_report 
-WHERE Time_stamp = '$row1'
-AND Status in (2)
-ORDER BY Status ASC
+WHERE MAC_ONU = '$row1'
+ORDER BY Time_stamp DESC
 ;") as $row) 
     {
     $counter++;
@@ -56,6 +56,6 @@ ORDER BY Status ASC
     echo "<td>" . $row[13] . "</td>";
     echo "</tr>";
 }
-echo "<tr>$counter ONU with status 2 in total in the $row1 report</tr>";
+echo "$counter reports for MAC_ONU $row1";
 include "../footer.php";
 ?>
