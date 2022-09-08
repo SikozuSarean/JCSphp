@@ -6,7 +6,7 @@ include "../secu_data.php";
 
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
 
-$query = 'INSERT INTO `MAIN_filter`
+$query = 'INSERT IGNORE INTO `MAIN_filter`
 (
     `Time_stamp`,
     `Status_0`,
@@ -66,8 +66,8 @@ LEFT JOIN (
 GROUP BY ar.Time_stamp
 ORDER BY ar.Time_stamp DESC;';
 
-if ($mysqli->query($query) === TRUE) {
-  echo "<p>data inserted into table.</p>";
+if ($result = $mysqli->query($query)) {
+  header("Location: MAIN_filter_new.php"); //redirects to the filter page
 }
 else
 {

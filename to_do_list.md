@@ -8,3 +8,6 @@ FROM attenuation_report
 WHERE Time_stamp = "2022-08-30 19:26:00"
 )
 make first a cte then search in that cte
+[X] After individual report is scapped and stored to database Redirect in to main filter page
+[] Urgent fix function store_scrape_store_filter
+[X] Urgent fix main_filter_new view
