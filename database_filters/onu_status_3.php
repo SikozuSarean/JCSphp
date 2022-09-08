@@ -2,25 +2,9 @@
 include "../header.php";
 ?>
 <h2>Full report ONU status 3</h2>
-<table class='blueTable'>
-    <thead>
-        <tr>
-            <th>Crt</th>
-            <th>OLT</th>
-            <th>GCOB</th>
-            <th>PON</th>
-            <th>Position</th>
-            <th>Status</th>
-            <th>MAC_ONU</th>
-            <th>Transmit</th>
-            <th>Receive</th>
-            <th>Down_speed</th>
-            <th>Up_Speed</th>
-            <th>Distance</th>
-            <th>Temperature</th>
-            <th>Time_stamp</th>
-        </tr>
-    </thead>
+<?php
+include "../standard_table_head.php";
+?>
     <tbody>
  <?php
 include "../secu_data.php";

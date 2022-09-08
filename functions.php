@@ -141,7 +141,7 @@ function store_scrape($scrape_target){
         $qq = array($OLT, $GCOB, $PON, $Position, $Status, $MAC_ONU, $Transmit, $Receive, $Down_speed, $Up_Speed, $Distance, $Temperature, $Time_stamp);
 
         if ($result = $mysqli->query($query)) {
-            // echo "<p>You have successfully entered $qq[5] and all the asociated data into the database.</P>";
+            header("Location: database_filters/MAIN_filter.php");
         }
         else
         {
@@ -150,9 +150,10 @@ function store_scrape($scrape_target){
 
     }
 $mysqli->close();
-echo "
-The attenuation report marked with $Time_stamp was successfully run and stored in the database. 
-To view $Time_stamp and all the other reports, please click on the following link: <br>
-<h1><a href='database_filters/MAIN_filter.php'>Back to the main page, click me! </a></h1>";
+// echo "
+// The attenuation report marked with $Time_stamp was successfully run and stored in the database. 
+// To view $Time_stamp and all the other reports, please click on the following link: <br>
+// <h1><a href='database_filters/MAIN_filter.php'>Back to the main page, click me! </a></h1>";
 }
+
 ?>

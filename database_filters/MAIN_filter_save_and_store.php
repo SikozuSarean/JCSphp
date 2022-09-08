@@ -5,7 +5,7 @@
 include "../secu_data.php";
 
 $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
-// $Time_stamp
+
 $query = 'INSERT INTO `MAIN_filter`
 (
     `Time_stamp`,
@@ -21,7 +21,6 @@ $query = 'INSERT INTO `MAIN_filter`
 ) WITH CTE_all as
 (SELECT *
 FROM attenuation_report
-WHERE Time_stamp = "2022-08-30 19:26:00"
 )
 SELECT ar.Time_stamp,
 COUNT(zero_status.Status) AS zero_status,

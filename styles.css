@@ -61,3 +61,13 @@ table.blueTable tfoot .links a{
 a {
   color: black;
 }
+
+.o-clasa-mai-frumoasa th{
+  position: sticky;
+  top:0;
+}
+
+.o-clasa-mai-frumoasa2 th{
+  position: sticky;
+  top:25px;
+}

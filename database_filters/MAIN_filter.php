@@ -1,3 +1,4 @@
+<a class="button" href="../scrape_and_store.php" target="_blank">Generate a new fresh report</a>
 
 <?php
 include "../header.php";
@@ -7,24 +8,24 @@ include "onu_search_view.php";
 
 <table class="blueTable">
   <thead>
-    <tr>
+    <tr class="o-clasa-mai-frumoasa">
       <th colspan="1">DATE TIME</th>
       <th colspan="4">Status</th>
       <th colspan="1">Receive</th>
       <th colspan="3">MAC_ONU</th>
       <th colspan="1">Time_stamp</th>
     </tr>
-    <tr>
-      <th>STAMP</th>
-      <th>0 and 4</th>
-      <th>2</th>
-      <th>3</th>
-      <th>Abnormal</th>
-      <th>< -27.00</th>
-      <th>Duplicates</th>
-      <th>Abnormal</th>
-      <th>Distinct</th>
-      <th>Distinct</th>
+    <tr class="o-clasa-mai-frumoasa2">
+      <th >STAMP</th>
+      <th >0 and 4</th>
+      <th >2</th>
+      <th >3</th>
+      <th >Abnormal</th>
+      <th >< -27.00</th>
+      <th >Duplicates</th>
+      <th >Abnormal</th>
+      <th >Distinct</th>
+      <th >Distinct</th>
     </tr>
   </thead>
 <tbody>
