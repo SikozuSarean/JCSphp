@@ -4,6 +4,6 @@ include ("../functions.php");
 
 $myfile = $answer;
 
-store_scrape_store_filter($myfile);
+store_scrape_store_filter(store_scrape($myfile));
 
 ?>
