@@ -1,5 +1,5 @@
 
-<!-- work in progress -->
+<!-- this script logs in to the main table and filters all its content then saves in to the filter table, ignores duplicates entry -->
 
 <?php
 include "../secu_data.php";

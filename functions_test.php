@@ -71,10 +71,10 @@ function scrape_function($scrape_target) {
     }
 }
 
-$Time_stamp = date("Y.m.d H:i",time()); //global variable used in 2 functions store_scrape and store_scrape_store_filter
+// $Time_stamp = date("Y.m.d H:i",time()); //global variable used in 2 functions store_scrape and store_scrape_store_filter
 
 
-function store_scrape($scrape_target){
+function store_scrape($scrape_target,$Time_stamp){
     include "db.php";
     include "secu_data.php";
     $mysqli = $conn;
@@ -89,7 +89,7 @@ function store_scrape($scrape_target){
     //the regex patterns
     $line_pattern = '/<tr>.*?<\/tr>/s'; //regex pattern for isolating the line 
     $elements_pattern = "/(?<=>).*(?=<)/"; //regex pattern for isolating the elements within the line 
-    global $Time_stamp;
+    // global $Time_stamp;
     preg_match_all($line_pattern,$scrape_target,$matches1,PREG_PATTERN_ORDER);
     for ($i = 1; $i < count($matches1[0]) ; $i++) {
         $line = $matches1[0][$i];
@@ -158,10 +158,10 @@ function store_scrape($scrape_target){
 // <h1><a href='database_filters/MAIN_filter.php'>Back to the main page, click me! </a></h1>";
 }
 
-function store_scrape_store_filter(){
+function store_scrape_store_filter($Time_stamp){
     include "../secu_data.php";
     $mysqli = new PDO("mysql:host=$hostname_name_toni;dbname=$db_name_toni",$db_user_toni,$db_pwd_toni);
-    global $Time_stamp;
+    // global $Time_stamp;
     $query = "INSERT IGNORE INTO `MAIN_filter`
     (
         `Time_stamp`,
@@ -242,4 +242,5 @@ function store_scrape_store_filter(){
 //     return true;
 //     echo "another_variable = $another_variable"; 
 // }
+
 ?>
