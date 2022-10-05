@@ -1,4 +1,4 @@
-<a class="button" href="../scrape_and_store.php" target="_blank">Generate a new fresh report</a>
+<a class="button" href="../MAIN_filter_save_and_store_latest_report.php" target="_blank">Generate a new fresh report</a>
 
 <?php
 include "../header.php";
@@ -9,14 +9,15 @@ include "onu_search_view.php";
 <table class="blueTable">
   <thead>
     <tr class="o-clasa-mai-frumoasa">
-      <th colspan="1">DATE TIME</th>
+      <th colspan="2">DATE TIME</th>
       <th colspan="4">Status</th>
       <th colspan="1">Receive</th>
       <th colspan="3">MAC_ONU</th>
       <th colspan="1">Time_stamp</th>
     </tr>
     <tr class="o-clasa-mai-frumoasa2">
-      <th >STAMP</th>
+      <th >Full Report</th>
+      <th >Delete</th>
       <th >0 and 4</th>
       <th >2</th>
       <th >3</th>
@@ -44,6 +45,11 @@ ORDER BY Time_stamp DESC;') as $row) { //sort by date time stamp descendent
     $time_date_stamp = $row['Time_stamp'];
     echo "<td> 
     <a href = 'onu_status_all.php?Time_stamp=".$row['Time_stamp']."'>$time_date_stamp </a>
+    </td>";
+    echo " <td>
+    <a onClick=\"javascript: return confirm('Are you sure you want to delete the report for $time_date_stamp ?');\" 
+    href='delete_time_stamp.php?Time_stamp=".$row['Time_stamp']."' 
+    style='color: red;''>Delete</a>
     </td>";
     $status_0 = $row['Status_0'];
     $status_4 = $row['Status_4'];
