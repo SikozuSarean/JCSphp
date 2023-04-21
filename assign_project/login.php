@@ -3,8 +3,7 @@
 //initial request with login data
 
 $ch = curl_init();
-$url1 = "https://erp.jcs.jo/login/";
-$url2 = "https://erp.jcs.jo/complaints/action/technical/assign/1";
+$url = "https://erp.jcs.jo/complaints/action/technical/assign/1";
 $username = "antonio";
 $password = "9CARACTERE";
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -13,7 +12,7 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$username&password=$password");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-curl_setopt($ch, CURLOPT_COOKIEJAR, '/var/www/ip4.x/file/tmp');  //could be empty, but cause problems on some hosts
+curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie-name');  //could be empty, but cause problems on some hosts
 curl_setopt($ch, CURLOPT_COOKIEFILE, '/var/www/ip4.x/file/tmp');  //could be empty, but cause problems on some hosts
 $answer = curl_exec($ch);
 if (curl_error($ch)) {

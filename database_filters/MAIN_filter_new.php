@@ -73,9 +73,15 @@ ORDER BY Time_stamp DESC;') as $row) { //sort by date time stamp descendent
     <a href = 'onu_status_power_smallest.php?Time_stamp=".$row['Time_stamp']."'>$Recieve_low</a>
     </td>";
     $Duplicates = $row['MAC_ONU_duplicates'];
+    if ($Duplicates != 0){
     echo "<td> 
-    <a href = 'onu_duplicate.php?Time_stamp=".$row['Time_stamp']."'>$Duplicates</a>
+    <a href = 'onu_duplicate.php?Time_stamp=".$row['Time_stamp']."'
+    style='color: red;''>$Duplicates</a>
     </td>";
+    } else {
+      echo "<td> 
+      </td>";
+    }
     $AbnormalMAC_ONU = $qq;
     echo "<td> 
     <a href = 'qq.php?Time_stamp=".$row['qq']."'>$AbnormalMAC_ONU</a>

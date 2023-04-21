@@ -1,6 +1,7 @@
 Visual Studio
 
 ctrl k c - comment out
+ctrl e c - uncomment
 ctrl + / html
 
 Mysql commands
