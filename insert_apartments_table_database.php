@@ -1,4 +1,7 @@
 <?php
+echo '<a href="index.htm">index</a><br>';
+echo '<a href="show_apartments_table_database.php">show_apartments_table_database</a><br>';
+
 
 include "secu_data.php";
 
@@ -51,6 +54,10 @@ else
     echo "Error entering $query into database: " . $mysqli->error."<br>";
 }
 
+
 $mysqli->close();
+
 //include 'footer.php';
+
 ?>
+

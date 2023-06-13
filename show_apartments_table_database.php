@@ -1,5 +1,9 @@
 <?php
 include "header.php";
+
+echo '<a href="index.htm">index</a><br>';
+
+echo '<a href="insert_apartments_table_database.php">insert_apartments_table_database</a><br>';
 ?>
 </head>
 <body>
